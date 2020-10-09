@@ -59,47 +59,55 @@ class LCATimerState extends State<LCATimer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("LCA"),),
-      body: Column(
-        children: [
-          Text(remainSeconds.toStringAsFixed(4)),
-          RaisedButton(
-            onPressed: () {
-              if (isStart) isFinish = true;
-              isStart = true;
-              Timer.periodic(
-                Duration(milliseconds: 10),
-                (timer) {
-                  updateTime();
-                  if (isFinish) {
-                    timer.cancel();
-                    final isWin = remainSeconds >= 0;
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text(isWin ? "win!!!" : "lose..."),
-                        content: Text(
-                            "あなたは${(widget.maxSeconds - remainSeconds).toString()}秒で致しました!!!\n"
-                            "${isWin ? '挑戦成功!!!${widget.title}に認定します!!!' : '挑戦失敗です...'}"
-                        ),
-                        actions: [
-                          RaisedButton(
-                            child: Text("Return to title"),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          )
-                        ],
-                      );
-                    }).then((_) => Navigator.pop(context));
+      appBar: AppBar(title: Text("LCA ${widget.title} Challenge"),),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("残り時間", style: TextStyle(fontSize: 40),),
+            Text("${remainSeconds.toStringAsFixed(2)}sec", style: TextStyle(fontSize: 60,),),
+            RaisedButton(
+              onPressed: () {
+                if (isStart) isFinish = true;
+                isStart = true;
+                Timer.periodic(
+                  Duration(milliseconds: 10),
+                  (timer) {
+                    updateTime();
+                    if (isFinish) {
+                      timer.cancel();
+                      final isWin = remainSeconds >= 0;
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(isWin ? "win!!!" : "lose..."),
+                          content: Text(
+                              "あなたは${(widget.maxSeconds - remainSeconds).toString()}秒で致しました!!!\n"
+                              "${isWin ? '挑戦成功!!!${widget.title}に認定します!!!' : '挑戦失敗です...'}"
+                          ),
+                          actions: [
+                            RaisedButton(
+                              child: Text("Return to title"),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            )
+                          ],
+                        );
+                      }).then((_) => Navigator.pop(context));
+                    }
                   }
-                }
-              );
-            },
-            child: Text("Start!!!"),
-          ),
-        ],
+                );
+              },
+              child: Text(isStart ? "Finish!!!" : "Start!!!", style: TextStyle(fontSize: 20),),
+              color: Colors.white,
+              shape: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+            ),
+          ],
+        ),
       )
     );
   }
