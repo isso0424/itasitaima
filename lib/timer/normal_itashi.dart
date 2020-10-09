@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class NormalItashi extends StatefulWidget {
   @override
@@ -55,11 +56,21 @@ class NormalItashiState extends State<NormalItashi> {
             ),
             _isDone
                 ? Flexible(
-                    child: Text(
+                    child: Column(
+                      children: [Text(
                       "お前の致し時間\n ${_formatTime()}",
                       style: TextStyle(fontSize: 50),
                     ),
-                  )
+                      IconButton(
+                      icon: Icon(Icons.share),
+                      onPressed: () {
+                      Share.share(
+                        "私の致し時間\n ${_formatTime()}"
+                        "#itashitaima"
+                      );
+                      },)
+                      ]
+                  ))
                 : Container(),
             Container(
               child: Row(
@@ -76,7 +87,6 @@ class NormalItashiState extends State<NormalItashi> {
                         });
                       setState(() {
                         _isDone = false;
-                        _time = 0;
                       });
                     },
                   ),
@@ -101,7 +111,6 @@ class NormalItashiState extends State<NormalItashi> {
                                 Navigator.pop(context);
                                 setState(() {
                                   _isDone = true;
-                                  _time = 0;
                                 });
                               },
                             ),
