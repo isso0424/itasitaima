@@ -31,7 +31,7 @@ class LammineChinchinAttackState extends State<LammineChinchinAttack> {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => LCATimer(maxSeconds: 60, title: "刃牙",)));
                 },
-                color: Colors.white,
+                color: Colors.black12,
                 shape: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
@@ -44,7 +44,7 @@ class LammineChinchinAttackState extends State<LammineChinchinAttack> {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => LCATimer(maxSeconds: 180, title: "ウルトラマン",)));
                 },
-                color: Colors.white,
+                color: Colors.black12,
                 shape: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
@@ -137,7 +137,7 @@ class LCATimerState extends State<LCATimer> {
                 );
               },
               child: Text(isStart ? "Finish!!!" : "Start!!!", style: TextStyle(fontSize: 20),),
-              color: Colors.white,
+              color: Colors.black12,
               shape: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
