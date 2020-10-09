@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class LammineChinchinAttack extends StatefulWidget {
   @override
@@ -47,7 +48,7 @@ class LCATimerState extends State<LCATimer> {
 
   void updateTime() {
     setState(() {
-      this.remainSeconds -= 0.01;
+      this.remainSeconds -= 0.1;
     });
   }
   @override
@@ -65,13 +66,13 @@ class LCATimerState extends State<LCATimer> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("残り時間", style: TextStyle(fontSize: 40),),
-            Text("${remainSeconds.toStringAsFixed(2)}sec", style: TextStyle(fontSize: 60,),),
+            Text("${remainSeconds.toStringAsFixed(1)}sec", style: TextStyle(fontSize: 60,),),
             RaisedButton(
               onPressed: () {
                 if (isStart) isFinish = true;
                 isStart = true;
                 Timer.periodic(
-                  Duration(milliseconds: 10),
+                  Duration(milliseconds: 100),
                   (timer) {
                     updateTime();
                     if (isFinish) {
@@ -83,14 +84,24 @@ class LCATimerState extends State<LCATimer> {
                         return AlertDialog(
                           title: Text(isWin ? "win!!!" : "lose..."),
                           content: Text(
-                              "あなたは${(widget.maxSeconds - remainSeconds).toString()}秒で致しました!!!\n"
+                              "あなたは${(widget.maxSeconds - remainSeconds).toStringAsFixed(1)}秒で致しました!!!\n"
                               "${isWin ? '挑戦成功!!!${widget.title}に認定します!!!' : '挑戦失敗です...'}"
                           ),
                           actions: [
-                            RaisedButton(
-                              child: Text("Return to title"),
+                            IconButton(
+                              icon: Icon(Icons.home),
                               onPressed: () {
                                 Navigator.pop(context);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.share),
+                              onPressed: () {
+                                Share.share(
+                                    "私は${(widget.maxSeconds - remainSeconds).toString()}秒で致して"
+                                    "${widget.title}の挑戦に${isWin ? "成功しました!!!" : "失敗しました..."}\n"
+                                    "#itashitaima"
+                                );
                               },
                             )
                           ],
