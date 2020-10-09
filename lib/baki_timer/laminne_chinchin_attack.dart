@@ -13,21 +13,46 @@ class LammineChinchinAttackState extends State<LammineChinchinAttack> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("LCA"),),
-      body: Column(
-        children: [
-          RaisedButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LCATimer(maxSeconds: 60, title: "刃牙",)));
-            },
-            child: Text("刃牙(1min)"),
-          ),
-          RaisedButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LCATimer(maxSeconds: 180, title: "ウルトラマン",)));
-            },
-            child: Text("ウルトラマン(3min)"),
-          )
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "†Laminne ChinChin Attack†",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 60,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LCATimer(maxSeconds: 60, title: "刃牙",)));
+                },
+                color: Colors.white,
+                shape: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                child: Text("刃牙(1min)", style: TextStyle(fontSize: 40),),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LCATimer(maxSeconds: 180, title: "ウルトラマン",)));
+                },
+                color: Colors.white,
+                shape: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                child: Text("ウルトラマン(3min)", style: TextStyle(fontSize: 40)),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
